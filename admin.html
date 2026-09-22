@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<title>合約管理後台 - NINTH LAB</title>
+<meta name="robots" content="noindex, nofollow" />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+<div id="appRoot" style="visibility:hidden;">
+<div class="wrap">
+  <div class="brand-header">
+    <div class="logo">NINTH LAB</div>
+    <div class="sub">合約管理後台</div>
+    <div style="margin-left:auto;">
+      <button class="secondary no-print" id="logoutBtn" style="padding:8px 14px;font-size:13px;">登出</button>
+    </div>
+  </div>
+
+  <!-- 建立新合約 -->
+  <div class="card">
+    <h1>建立新合約</h1>
+    <label for="clientNameInput">客戶名稱</label>
+    <input type="text" id="clientNameInput" placeholder="例如：王小明 / ＯＯ商行" />
+
+    <label for="projectNameInput">合約標題</label>
+    <input type="text" id="projectNameInput" value="網站建置服務合約" />
+
+    <label for="amountInput">報價金額（NT$）</label>
+    <input type="number" id="amountInput" value="10000" />
+
+    <label for="contentInput">合約內容</label>
+    <textarea id="contentInput"></textarea>
+
+    <div class="error-msg" id="createError"></div>
+    <button class="block" id="createBtn">產生編號並建立合約</button>
+
+    <div id="createdResult" style="display:none; margin-top:16px;">
+      <div class="card" style="background:#ecfdf5; border-color:#a7f3d0;">
+        <p style="margin:0 0 4px;"><strong>合約已建立</strong></p>
+        <p class="muted" style="margin:0 0 10px;">合約編號：<span id="createdCode" style="font-family:ui-monospace,monospace; font-weight:700; color:#111;"></span></p>
+        <label style="margin-top:0;">傳給客戶的簽署連結（可直接透過 LINE 傳送）</label>
+        <input type="text" id="createdLink" readonly onclick="this.select()" />
+        <div class="row" style="margin-top:10px;">
+          <button class="secondary" id="copyLinkBtn">複製連結</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 合約列表 -->
+  <div class="card">
+    <h1>合約列表</h1>
+    <div id="listLoading" class="muted">載入中…</div>
+    <div id="contractList"></div>
+  </div>
+</div>
+</div>
+
+<!-- 密碼保護遮罩 -->
+<div id="authOverlay">
+  <div class="card">
+    <h1 class="center">合約管理後台</h1>
+    <p class="muted center">請輸入密碼</p>
+    <label for="authPasswordInput">密碼</label>
+    <input type="password" id="authPasswordInput" autocomplete="current-password" placeholder="請輸入密碼" />
+    <div class="error-msg" id="authError"></div>
+    <button class="block" id="authSubmitBtn">登入</button>
+  </div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<script src="js/firebase-init.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>
