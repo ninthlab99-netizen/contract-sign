@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<title>合約線上簽署 - NINTH LAB</title>
+<meta name="robots" content="noindex, nofollow" />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+<div class="wrap">
+  <div class="brand-header">
+    <div class="logo">NINTH LAB</div>
+    <div class="sub">官網建置合約 · 線上簽署</div>
+  </div>
+
+  <!-- 查詢區塊 -->
+  <div class="card" id="lookupCard">
+    <h1>合約線上簽署</h1>
+    <p class="muted">請輸入您收到的合約編號，查詢並簽署您的合約。</p>
+    <label for="codeInput">合約編號</label>
+    <input type="text" id="codeInput" placeholder="例如：7K9M2XQ4" autocomplete="off" autocapitalize="characters" />
+    <div class="error-msg" id="lookupError"></div>
+    <button class="block" id="lookupBtn">查詢合約</button>
+  </div>
+
+  <!-- 合約內容 + 簽署區塊 -->
+  <div class="card" id="contractCard" style="display:none;">
+    <h1 id="contractTitle">合約內容</h1>
+    <p class="muted" id="contractMeta"></p>
+    <div class="contract-content" id="contractContent"></div>
+
+    <div id="signSection">
+      <h2 style="margin-top:20px;">簽署確認</h2>
+      <label for="signerNameInput">簽署人姓名</label>
+      <input type="text" id="signerNameInput" placeholder="請輸入您的姓名" autocomplete="name" />
+
+      <label>手寫簽名（請用手指或滑鼠在下方簽名）</label>
+      <div class="sig-pad-wrap">
+        <canvas id="sigPad"></canvas>
+      </div>
+      <div class="row" style="margin-top:8px;">
+        <button type="button" class="secondary" id="clearSigBtn">清除重簽</button>
+      </div>
+
+      <div class="checkbox-row">
+        <input type="checkbox" id="agreeCheckbox" />
+        <label for="agreeCheckbox" style="margin:0;">本人已詳閱並同意以上合約內容</label>
+      </div>
+
+      <div class="error-msg" id="signError"></div>
+      <button class="block" id="submitSignBtn">確認簽署</button>
+    </div>
+
+    <div id="signedNotice" style="display:none;">
+      <div class="badge signed" style="margin-top:6px;">已簽署</div>
+      <p style="margin-top:10px;" id="signedInfo"></p>
+      <button class="secondary no-print" id="printBtn">列印 / 另存 PDF</button>
+    </div>
+  </div>
+
+  <div class="card center" id="successCard" style="display:none;">
+    <h1>簽署完成</h1>
+    <p>感謝您完成簽署，我們已收到您的合約確認。</p>
+    <button class="secondary no-print" id="printBtn2">列印 / 另存 PDF</button>
+  </div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<script src="js/firebase-init.js"></script>
+<script src="js/sign.js"></script>
+</body>
+</html>
